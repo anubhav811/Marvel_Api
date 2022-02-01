@@ -27,7 +27,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
            cvChar.setOnClickListener{
-
+               fragmentManager?.beginTransaction()?.replace(R.id.navHostFragment,CharacterFragment())
+                   ?.commit()
            }
 
            cvComics.setOnClickListener{
