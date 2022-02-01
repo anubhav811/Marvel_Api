@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_character.xml" value="0.2" />
+        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/category_list_item.xml" value="0.4" />
+        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_character.xml" value="0.4" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_comics.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_events.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
