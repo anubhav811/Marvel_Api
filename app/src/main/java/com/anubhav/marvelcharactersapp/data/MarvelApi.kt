@@ -2,6 +2,7 @@ package com.anubhav.marvelcharactersapp.data
 
 import com.anubhav.marvelcharactersapp.data.dto.CharacterResponse
 import com.anubhav.marvelcharactersapp.util.Constants
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,6 +18,7 @@ interface MarvelApi {
         @Query("hash")
         hash:String = Constants.hash(),
         @Query("offset")
-        offset:String
-    ): CharacterResponse
+        offset:Int
+    ): Response<CharacterResponse>
+
 }

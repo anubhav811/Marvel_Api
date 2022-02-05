@@ -31,21 +31,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = (activity as MainActivity).viewModel
+//        viewModel = (activity as MainActivity).viewModel
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         with(binding){
 
+        cvChar.setOnClickListener {
 
-            cvChar.setOnClickListener{
-                    findNavController().navigate(R.id.action_homeFragment_to_characterFragment)
-           }
+            findNavController().navigate(R.id.action_homeFragment_to_characterFragment)
 
-           cvComics.setOnClickListener{
+        }
+
+            cvComics.setOnClickListener{
 
 
            }

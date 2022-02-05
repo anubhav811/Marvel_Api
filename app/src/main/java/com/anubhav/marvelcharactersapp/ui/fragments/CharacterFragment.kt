@@ -8,14 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.adapters.CharacterAdapter
+import com.anubhav.marvelcharactersapp.data.dto.Result
 import com.anubhav.marvelcharactersapp.databinding.FragmentCharacterBinding
 import com.anubhav.marvelcharactersapp.databinding.FragmentHomeBinding
 import com.anubhav.marvelcharactersapp.domain.models.CharacterModel
+import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
 import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
+import com.anubhav.marvelcharactersapp.ui.MainActivity
 import com.anubhav.marvelcharactersapp.util.Resource
 import kotlinx.android.synthetic.main.fragment_character.*
 
@@ -32,30 +37,42 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setupRecyclerView()
+        val marvelRepository = MarvelRepository()
+        val viewModelProvider = MarvelViewModelFactory(marvelRepository)
+        viewModel = ViewModelProvider(this,viewModelProvider).get(CharacterViewModel::class.java)
         _binding = FragmentCharacterBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
-
+        setupRecyclerView()
             viewModel.characters.observe(viewLifecycleOwner, Observer { response ->
                 when(response) {
                     is Resource.Success -> {
+                        Log.d("sadadasdASD","characterResponse.toString()")
                         response.data?.let { characterResponse ->
+
                             characterAdapter.differ.submitList(characterResponse.data.results as MutableList<CharacterModel>)
                         }
                     }
                     is Resource.Error -> {
+
                         response.message?.let { message ->
                             Log.e(TAG, "An error occurred: $message")
                         }
                     }
+                    is Resource.Loading->{
+                        response.data?.let { characterResponse ->
+                            for(result in characterResponse.data.results.toList()){
+                                Log.d("Result", "result.toCharacterModel().toString()")
+                            }
+                        }
+
+                    }
                 }
             })
-        }
+
     }
 
     private fun setupRecyclerView(){

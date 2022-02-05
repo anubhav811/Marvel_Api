@@ -1,6 +1,5 @@
 package com.anubhav.marvelcharactersapp.data.dto
 
-
 data class CharacterResponse(
     val attributionHTML: String,
     val attributionText: String,
