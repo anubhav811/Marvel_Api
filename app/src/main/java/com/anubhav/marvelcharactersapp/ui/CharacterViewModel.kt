@@ -19,7 +19,7 @@ class CharacterViewModel(
     fun getCharacters(offset: String) = viewModelScope.launch {
             characters.postValue(Resource.Loading())
         val response = marvelRepository.getAllCharacters(20)
-        characters.postValue(handleCharacterResponse(response))
+        characters.postValue(handleCharacterResponse(response as Response<CharacterResponse>))
     }
 
     private fun handleCharacterResponse(response: Response<CharacterResponse>): Resource<CharacterResponse>? {

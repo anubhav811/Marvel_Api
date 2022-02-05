@@ -3,18 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashActivity">
+    >
 
-    <activity
-        android:id="@+id/splashActivity"
-        android:name="com.anubhav.marvelcharactersapp.ui.SplashActivity"
-        android:label="activity_splash"
-        tools:layout="@layout/activity_splash" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.anubhav.marvelcharactersapp.ui.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.anubhav.marvelcharactersapp.ui.fragments.HomeFragment"

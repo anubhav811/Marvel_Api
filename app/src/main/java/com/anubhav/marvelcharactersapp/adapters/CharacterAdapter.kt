@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.anubhav.marvelcharactersapp.R
-import com.anubhav.marvelcharactersapp.data.dto.CharacterResponse
 import com.anubhav.marvelcharactersapp.domain.models.CharacterModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.category_list_item.view.*
@@ -17,6 +16,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     inner class CharacterViewHolder(itemView: View)  :RecyclerView.ViewHolder(itemView)
 
     private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
+
         override fun areItemsTheSame(oldItem: CharacterModel, newItem: CharacterModel): Boolean {
             return oldItem.id == newItem.id
         }

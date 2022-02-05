@@ -14,6 +14,7 @@ import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.adapters.CharacterAdapter
 import com.anubhav.marvelcharactersapp.databinding.FragmentCharacterBinding
 import com.anubhav.marvelcharactersapp.databinding.FragmentHomeBinding
+import com.anubhav.marvelcharactersapp.domain.models.CharacterModel
 import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
 import com.anubhav.marvelcharactersapp.util.Resource
 import kotlinx.android.synthetic.main.fragment_character.*
@@ -44,12 +45,12 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
                 when(response) {
                     is Resource.Success -> {
                         response.data?.let { characterResponse ->
-                            characterAdapter.differ.submitList(characterResponse.data.results.toList())
+                            characterAdapter.differ.submitList(characterResponse.data.results as MutableList<CharacterModel>)
                         }
                     }
                     is Resource.Error -> {
                         response.message?.let { message ->
-                            Log.e(TAG, "An error occured: $message")
+                            Log.e(TAG, "An error occurred: $message")
                         }
                     }
                 }

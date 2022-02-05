@@ -6,15 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.databinding.FragmentHomeBinding
+import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
+import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
+import com.anubhav.marvelcharactersapp.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    private  lateinit var  navController : NavController
+    lateinit var viewModel: CharacterViewModel
 
     private val TAG = "HomeFragment"
     private var _binding : FragmentHomeBinding ? = null
@@ -24,6 +31,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = (activity as MainActivity).viewModel
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -31,10 +39,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
-            navController = navHostFragment.getFragment<NavHostFragment>().navController
+
 
             cvChar.setOnClickListener{
-              navController.navigate(R.id.action_homeFragment_to_characterFragment)
+                    findNavController().navigate(R.id.action_homeFragment_to_characterFragment)
            }
 
            cvComics.setOnClickListener{
