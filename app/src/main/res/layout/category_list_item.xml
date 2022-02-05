@@ -36,7 +36,7 @@
                     android:layout_gravity="center" />
 
                 <ImageView
-                    android:id="@+id/item_iv"
+                    android:id="@+id/itemImage_iv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
@@ -51,7 +51,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/item_tv"
+                    android:id="@+id/itemName_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Iron Man"
