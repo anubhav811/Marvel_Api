@@ -1,6 +1,7 @@
 package com.anubhav.marvelcharactersapp.ui
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,24 +31,23 @@ class CharacterViewModel(
 
     private fun handleCharacterResponse(response:Response<CharacterResponse>): Resource<CharacterResponse>? {
         if (response.isSuccessful) {
-            Log.d("asdasda","response successful")
             response.body()?.let { resultResponse ->
-                if (characterResponse == null) {
-                    characterResponse = resultResponse
-                }
-                else{
-                    val oldCharacters = characterResponse!!.data.results.map {
-                        it.toCharacterModel()
-                    } as MutableList<CharacterModel>
-                    val newCharacters = resultResponse.data.results.map {
-                        it.toCharacterModel()
-                    } as MutableList<CharacterModel>
-                    oldCharacters.addAll(newCharacters)
-                }
-                return Resource.Success(characterResponse ?: resultResponse)
+                return Resource.Success(resultResponse)
+//
+//                if (characterResponse == null) {
+//                    characterResponse = resultResponse
+//                }
+//                else{
+//                    val oldCharacters = characterResponse!!.data.results.map {
+//                        it.toCharacterModel()
+//                    } as MutableList<CharacterModel>
+//                    val newCharacters = resultResponse.data.results.map {
+//                        it.toCharacterModel()
+//                    } as MutableList<CharacterModel>
+//                    oldCharacters.addAll(newCharacters)
+//                }
             }
-        }
-        Log.d("asdaasdsda","response us")
+            }
         return Resource.Error(response.message())
     }
 

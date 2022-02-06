@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
@@ -46,14 +48,16 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
             viewModel.characters.observe(viewLifecycleOwner, Observer { response ->
                 when(response) {
                     is Resource.Success -> {
                         Log.d("sadadasdASD","characterResponse.toString()")
                         response.data?.let { characterResponse ->
-
-                            characterAdapter.differ.submitList(characterResponse.data.results as MutableList<CharacterModel>)
+                            characterAdapter.differ.submitList(characterResponse.data.results.toList().map {
+                                it.toCharacterModel()
+                            })
                         }
                     }
                     is Resource.Error -> {
@@ -64,15 +68,14 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
                     }
                     is Resource.Loading->{
                         response.data?.let { characterResponse ->
-                            for(result in characterResponse.data.results.toList()){
-                                Log.d("Result", "result.toCharacterModel().toString()")
-                            }
+                            characterAdapter.differ.submitList(characterResponse.data.results.toList().map {
+                                it.toCharacterModel()
+                            })
                         }
 
                     }
                 }
             })
-
     }
 
     private fun setupRecyclerView(){
@@ -84,3 +87,4 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
     }
 
 }
+

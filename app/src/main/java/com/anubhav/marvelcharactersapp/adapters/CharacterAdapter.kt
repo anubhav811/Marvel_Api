@@ -41,7 +41,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
       val character = differ.currentList[position]
             holder.itemView.apply {
                     itemName_tv.text =character.name
-                    var image_url = "${character.thumbnail}/standard_small.jpg"
+                    var image_url = "${character.thumbnail}"
                     Glide.with(this).load(image_url).into(itemImage_iv)
                 }
     }
