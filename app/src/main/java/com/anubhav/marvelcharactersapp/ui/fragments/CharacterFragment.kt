@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.GridView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.adapters.CharacterAdapter
@@ -24,6 +26,7 @@ import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
 import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
 import com.anubhav.marvelcharactersapp.ui.MainActivity
 import com.anubhav.marvelcharactersapp.util.Resource
+import kotlinx.android.synthetic.main.category_list_item.*
 import kotlinx.android.synthetic.main.fragment_character.*
 
 
@@ -60,22 +63,17 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
                         }
                     }
                     is Resource.Error -> {
-
                         response.message?.let { message ->
                             Log.e(TAG, "An error occurred: $message")
                         }
                     }
-                    is Resource.Loading->{
-                        response.data?.let { characterResponse ->
-                            characterAdapter.differ.submitList(characterResponse.data.results.toList().map {
-                                it.toCharacterModel()
-                            })
-                        }
 
-                    }
                 }
             })
+
+
     }
+
 
     private fun setupRecyclerView(){
         characterAdapter = CharacterAdapter()

@@ -17,10 +17,11 @@ class CharacterViewModel(
 ) : ViewModel() {
 
     val characters: MutableLiveData<Resource<CharacterResponse>> = MutableLiveData()
+    var characterPage = 1
 
     var characterResponse : CharacterResponse?= null
 
-    private fun getCharacters() = viewModelScope.launch {
+    fun getCharacters() = viewModelScope.launch {
         characters.postValue(Resource.Loading())
         val response = marvelRepository.getAllCharacters()
         characters.postValue(handleCharacterResponse(response))
@@ -32,6 +33,7 @@ class CharacterViewModel(
     private fun handleCharacterResponse(response:Response<CharacterResponse>): Resource<CharacterResponse>? {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                characterPage++
                 if (characterResponse == null) {
                     characterResponse = resultResponse
                 }
@@ -44,7 +46,7 @@ class CharacterViewModel(
                     } as MutableList<CharacterModel>
                     oldCharacters.addAll(newCharacters)
                 }
-                return Resource.Success(resultResponse)
+                return Resource.Success(characterResponse?:resultResponse)
 
             }
             }
