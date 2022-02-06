@@ -53,7 +53,6 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
             viewModel.characters.observe(viewLifecycleOwner, Observer { response ->
                 when(response) {
                     is Resource.Success -> {
-                        Log.d("sadadasdASD","characterResponse.toString()")
                         response.data?.let { characterResponse ->
                             characterAdapter.differ.submitList(characterResponse.data.results.toList().map {
                                 it.toCharacterModel()
@@ -82,7 +81,7 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
         characterAdapter = CharacterAdapter()
         rvChar.apply{
             adapter = characterAdapter
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = GridLayoutManager(activity,3)
         }
     }
 

@@ -20,32 +20,32 @@ class CharacterViewModel(
 
     var characterResponse : CharacterResponse?= null
 
-    private fun getCharacters(offset: String) = viewModelScope.launch {
+    private fun getCharacters() = viewModelScope.launch {
         characters.postValue(Resource.Loading())
-        val response = marvelRepository.getAllCharacters(20)
+        val response = marvelRepository.getAllCharacters()
         characters.postValue(handleCharacterResponse(response))
     }
     init {
-        getCharacters("30")
+        getCharacters()
     }
 
     private fun handleCharacterResponse(response:Response<CharacterResponse>): Resource<CharacterResponse>? {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                if (characterResponse == null) {
+                    characterResponse = resultResponse
+                }
+                else{
+                    val oldCharacters = characterResponse!!.data.results.map {
+                        it.toCharacterModel()
+                    } as MutableList<CharacterModel>
+                    val newCharacters = resultResponse.data.results.map {
+                        it.toCharacterModel()
+                    } as MutableList<CharacterModel>
+                    oldCharacters.addAll(newCharacters)
+                }
                 return Resource.Success(resultResponse)
-//
-//                if (characterResponse == null) {
-//                    characterResponse = resultResponse
-//                }
-//                else{
-//                    val oldCharacters = characterResponse!!.data.results.map {
-//                        it.toCharacterModel()
-//                    } as MutableList<CharacterModel>
-//                    val newCharacters = resultResponse.data.results.map {
-//                        it.toCharacterModel()
-//                    } as MutableList<CharacterModel>
-//                    oldCharacters.addAll(newCharacters)
-//                }
+
             }
             }
         return Resource.Error(response.message())

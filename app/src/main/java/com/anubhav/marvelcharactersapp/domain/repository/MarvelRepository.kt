@@ -8,7 +8,7 @@ import retrofit2.Response
 class MarvelRepository (
     private val Api: MarvelApi = RetrofitInstance.api
         ){
-    suspend fun getAllCharacters(offset:Int): Response<CharacterResponse> {
-        return Api.getAllCharacters(offset=offset)
+    suspend fun getAllCharacters(): Response<CharacterResponse> {
+        return Api.getAllCharacters()
 }
 }

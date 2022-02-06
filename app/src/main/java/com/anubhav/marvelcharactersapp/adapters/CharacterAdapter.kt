@@ -1,5 +1,6 @@
 package com.anubhav.marvelcharactersapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.domain.models.CharacterModel
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.category_list_item.view.*
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>(){
@@ -40,9 +42,12 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
       val character = differ.currentList[position]
             holder.itemView.apply {
+
+                itemName_tv.isSelected = true
                     itemName_tv.text =character.name
-                    var image_url = "${character.thumbnail}"
+                    var image_url = "${character.thumbnail}/standard_small.${character.thumbnailExt}"
                     Glide.with(this).load(image_url).into(itemImage_iv)
+
                 }
     }
 
