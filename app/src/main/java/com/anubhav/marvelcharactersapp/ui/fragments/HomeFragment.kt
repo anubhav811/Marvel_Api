@@ -1,27 +1,18 @@
 package com.anubhav.marvelcharactersapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.databinding.FragmentHomeBinding
-import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
-import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
-import com.anubhav.marvelcharactersapp.ui.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.anubhav.marvelcharactersapp.ui.MarvelViewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    lateinit var viewModel: CharacterViewModel
+    lateinit var viewModel: MarvelViewModel
 
     private val TAG = "HomeFragment"
     private var _binding : FragmentHomeBinding ? = null
@@ -42,30 +33,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         with(binding){
 
-        cvChar.setOnClickListener {
+        ivChar.setOnClickListener {
 
             findNavController().navigate(R.id.action_homeFragment_to_characterFragment)
 
         }
 
-            cvComics.setOnClickListener{
+            ivComics.setOnClickListener{
 
 
            }
 
-           cvEvents.setOnClickListener{
+           ivEvents.setOnClickListener{
 
            }
 
-           cvStories.setOnClickListener{
+           ivStories.setOnClickListener{
 
            }
 
-           cvSeries.setOnClickListener{
+           ivSeries.setOnClickListener{
 
            }
 
-           cvCreators.setOnClickListener{
+           ivCreators.setOnClickListener{
 
            }
         }

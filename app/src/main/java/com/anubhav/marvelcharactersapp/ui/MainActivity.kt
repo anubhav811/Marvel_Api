@@ -2,13 +2,9 @@ package com.anubhav.marvelcharactersapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
-import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

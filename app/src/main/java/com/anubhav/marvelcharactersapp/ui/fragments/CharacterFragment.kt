@@ -7,32 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.GridView
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.anubhav.marvelcharactersapp.MarvelViewModelFactory
+import com.anubhav.marvelcharactersapp.ui.MarvelViewModelFactory
 import com.anubhav.marvelcharactersapp.R
 import com.anubhav.marvelcharactersapp.adapters.CharacterAdapter
-import com.anubhav.marvelcharactersapp.data.dto.Result
 import com.anubhav.marvelcharactersapp.databinding.FragmentCharacterBinding
-import com.anubhav.marvelcharactersapp.databinding.FragmentHomeBinding
-import com.anubhav.marvelcharactersapp.domain.models.CharacterModel
 import com.anubhav.marvelcharactersapp.domain.repository.MarvelRepository
-import com.anubhav.marvelcharactersapp.ui.CharacterViewModel
-import com.anubhav.marvelcharactersapp.ui.MainActivity
+import com.anubhav.marvelcharactersapp.ui.MarvelViewModel
 import com.anubhav.marvelcharactersapp.util.Resource
-import kotlinx.android.synthetic.main.category_list_item.*
 import kotlinx.android.synthetic.main.fragment_character.*
 
 
 class CharacterFragment : Fragment(R.layout.fragment_character) {
     private val TAG = "CharacterFragment"
-    lateinit var viewModel: CharacterViewModel
+    lateinit var viewModel: MarvelViewModel
     lateinit var characterAdapter: CharacterAdapter
 
     private var _binding : FragmentCharacterBinding? = null
@@ -44,7 +35,7 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
     ): View? {
         val marvelRepository = MarvelRepository()
         val viewModelProvider = MarvelViewModelFactory(marvelRepository)
-        viewModel = ViewModelProvider(this,viewModelProvider).get(CharacterViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelProvider).get(MarvelViewModel::class.java)
         _binding = FragmentCharacterBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -73,7 +64,46 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
 
 
     }
+    var isLoading = false
+    var isLastPage = false
+    var isScrolling = false
 
+    val scrollListener = object : RecyclerView.OnScrollListener(){
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            val layoutManager = recyclerView.layoutManager as GridLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount  = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+
+            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >=0
+
+            val isTotalMoreThanVisible = totalItemCount >= 100
+
+            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
+
+            if(shouldPaginate){
+                val page = viewModel.characterPage
+                viewModel.getCharacters(page*200)
+                isScrolling = false
+            }
+
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                isScrolling = true
+
+        }
+
+
+
+    }
 
     private fun setupRecyclerView(){
         characterAdapter = CharacterAdapter()

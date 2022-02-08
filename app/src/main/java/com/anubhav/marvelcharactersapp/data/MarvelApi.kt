@@ -16,7 +16,11 @@ interface MarvelApi {
         @Query("ts")
         ts:String = Constants.timeStamp,
         @Query("hash")
-        hash:String = Constants.hash()
+        hash:String = Constants.hash(),
+        @Query("limit")
+        limit:Int = 100,
+        @Query("offset")
+        offset:Int = 100
     ): Response<CharacterResponse>
 
 }

@@ -3,15 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/drawable/rounded_bg.xml" value="0.2385" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/category_list_item.xml" value="0.4" />
+        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/category_list_item.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_character.xml" value="0.264" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_character_details.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_comics.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_creators.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_events.xml" value="0.25" />
-        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_series.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/layout/fragment_stories.xml" value="0.25" />
         <entry key="..\:/Learning/Android/MarvelCharactersApp/app/src/main/res/xml/network_security_config.xml" value="0.1" />
@@ -23,5 +24,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

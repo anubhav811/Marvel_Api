@@ -12,22 +12,22 @@ import com.anubhav.marvelcharactersapp.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class CharacterViewModel(
+class MarvelViewModel(
     val marvelRepository: MarvelRepository
 ) : ViewModel() {
 
     val characters: MutableLiveData<Resource<CharacterResponse>> = MutableLiveData()
-    var characterPage = 1
+    var characterPage = 0
 
     var characterResponse : CharacterResponse?= null
 
-    fun getCharacters() = viewModelScope.launch {
+    fun getCharacters(offset:Int) = viewModelScope.launch {
         characters.postValue(Resource.Loading())
-        val response = marvelRepository.getAllCharacters()
+        val response = marvelRepository.getAllCharacters(offset)
         characters.postValue(handleCharacterResponse(response))
     }
     init {
-        getCharacters()
+        getCharacters(offset = 0)
     }
 
     private fun handleCharacterResponse(response:Response<CharacterResponse>): Resource<CharacterResponse>? {
